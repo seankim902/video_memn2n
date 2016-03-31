@@ -163,7 +163,7 @@ def train():
                 
                   
                 
-                cost, _, pr, acc = sess.run([loss, train_op, pred, accuracy],
+                cost, _, _pred, acc = sess.run([loss, train_op, pred, accuracy],
                                               {videos: x_,
                                                y: y_})
                 if j % 2 == 0 :
@@ -180,7 +180,7 @@ def train():
                         y_ = np.array([ valid_y[k,:] for k in indices])
                         
                         _pred = sess.run(pred,
-                                        {x: x_,
+                                        {videos: x_,
                                          y: y_})
                
                         val_preds = val_preds + _pred.tolist()
@@ -196,11 +196,11 @@ def get_config():
         
         
         img_dim = 4096
-        mem_dim = 256
-        mem_size = steps = 45
+        mem_dim = 128
+        mem_size = steps = 15
         nhop = 2
         n_y = 4
-        batch_size = 256
+        batch_size = 512
         nl_prob = 0.9
         lr = 0.001
         epoch = 50
